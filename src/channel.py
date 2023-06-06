@@ -21,20 +21,26 @@ class Channel:
         self.view_count = self.channel['items'][0]["statistics"]["viewCount"]
 
     def print_info(self) -> None:
+        """Метод печати на экран """
         print(json.dumps(self.channel))
 
     @property
     def channel_id(self):
+        """Метод вывода приватного атрибута __channel_id """
         return self.__channel_id
 
     @classmethod
     def get_service(cls, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
+        """Метод создания экземпляров класса"""
         return cls(standart)
 
     @staticmethod
-    def to_json(path): #не совсем понял ,"сохраняющий в файл ЗНАЧЕНИЯ атрибутов экземпляра Channel"
-        with open(path, 'a') as file:
-            a = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
-            for attr in [i for i in dir(a) if not i.startswith('_')]:
+    def to_json(path, standart_='UC-OVMPlMA3-YCIeg4z5z23A'):  # не совсем понял
+        # ,"сохраняющий в файл ЗНАЧЕНИЯ атрибутов экземпляра Channel"
+        """Сохранение значений атрибутов экземпляра класса в json"""
+
+        with open(path, 'w') as file:
+            exz = Channel(standart_)
+            for attr in [i for i in dir(exz) if not i.startswith('_')]:
                 file.write('\n')
-                file.write(str(getattr(a, attr)))
+                file.write(str(getattr(exz, attr)))
