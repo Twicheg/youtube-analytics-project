@@ -32,9 +32,9 @@ class Channel:
         return cls(standart)
 
     @staticmethod
-    def to_json(path):
-        with open(path, 'w') as file:
+    def to_json(path): #не совсем понял ,"сохраняющий в файл ЗНАЧЕНИЯ атрибутов экземпляра Channel"
+        with open(path, 'a') as file:
             a = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
             for attr in [i for i in dir(a) if not i.startswith('_')]:
-                if not attr == 'API_KEY':
-                    file.write(str(getattr(a, attr)))
+                file.write('\n')
+                file.write(str(getattr(a, attr)))
