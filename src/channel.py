@@ -49,7 +49,7 @@ class Channel:
     #         json.dump(dict_, fp=file)
 
     @staticmethod
-    def to_json_two(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
+    def to_json(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
         # Или так правильно ?
         """Сохранение значений атрибутов экземпляра класса в json"""
         exz = Channel(standart)
