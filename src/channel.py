@@ -34,19 +34,19 @@ class Channel:
         """Метод создания экземпляров класса"""
         return cls(standart).youtube
 
-    @staticmethod
-    def to_json(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
-        """сохранения имен атрибутов экземпляра , и их значеня в словарь"""
-        """Сохранение значений атрибутов экземпляра класса в json"""
-
-        with open(path, 'w') as file:
-            exz = Channel(standart)
-            dict_ = {}
-            for attr in exz.__dict__:
-                print(attr)
-                dict_[attr] = str(getattr(exz, attr))
-                print(dict_)
-            json.dump(dict_, fp=file)
+    # @staticmethod
+    # def to_json(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
+    #     """сохранения имен атрибутов экземпляра , и их значеня в словарь"""
+    #     """Сохранение значений атрибутов экземпляра класса в json"""
+    #
+    #     with open(path, 'w') as file:
+    #         exz = Channel(standart)
+    #         dict_ = {}
+    #         for attr in exz.__dict__:
+    #             print(attr)
+    #             dict_[attr] = str(getattr(exz, attr))
+    #             print(dict_)
+    #         json.dump(dict_, fp=file)
 
     @staticmethod
     def to_json_two(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
