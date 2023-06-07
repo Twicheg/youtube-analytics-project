@@ -32,15 +32,26 @@ class Channel:
     @classmethod
     def get_service(cls, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
         """Метод создания экземпляров класса"""
-        return cls(standart)
+        return cls(standart).youtube
 
     @staticmethod
-    def to_json(path, standart_='UC-OVMPlMA3-YCIeg4z5z23A'):  # не совсем понял
-        # ,"сохраняющий в файл ЗНАЧЕНИЯ атрибутов экземпляра Channel"
+    def to_json(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
+        """сохранения имен атрибутов экземпляра , и их значеня в словарь"""
         """Сохранение значений атрибутов экземпляра класса в json"""
 
         with open(path, 'w') as file:
-            exz = Channel(standart_)
-            for attr in [i for i in dir(exz) if not i.startswith('_')]:
-                file.write('\n')
-                file.write(str(getattr(exz, attr)))
+            exz = Channel(standart)
+            dict_ = {}
+            for attr in exz.__dict__:
+                print(attr)
+                dict_[attr] = str(getattr(exz, attr))
+                print(dict_)
+            json.dump(dict_, fp=file)
+
+    @staticmethod
+    def to_json_two(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
+        # Или так правильно ?
+        """Сохранение значений атрибутов экземпляра класса в json"""
+        exz = Channel(standart)
+        with open(path, 'w') as file:
+            json.dump(exz.channel, fp=file)
