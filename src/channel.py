@@ -19,7 +19,8 @@ class Channel:
         self.subscriber_Count = self.channel['items'][0]["statistics"]["subscriberCount"]
         self.description = self.channel['items'][0]['snippet']["description"]
         self.view_count = self.channel['items'][0]["statistics"]["viewCount"]
-
+        self.playlists = self.youtube.playlists().list(channelId=channel_id,part='contentDetails,snippet',maxResults=50,).execute()
+        #self.video_response = self.youtube.videos().list(part='contentDetails,statistics',id=','.join(video_ids)).execute()
     def print_info(self) -> None:
         """Метод печати на экран """
         print(json.dumps(self.channel))
@@ -43,8 +44,7 @@ class Channel:
 
     def __str__(self):
         """метод вывода пользователю"""
-        url_description_index = self.description.find('https')  # только там какая-то вменяемая ссылка
-        return f"{self.title} ({self.description[url_description_index:-3]})"
+        return f"{self.title} (https://www.youtube.com/channel/{self.channel_id})"
 
     def __add__(self, other):
         """метод перезрузки операции сложения"""
