@@ -16,6 +16,7 @@ class Channel:
         self.video_count = self.channel['items'][0]["statistics"]["videoCount"]
         for channels_ in self.channel['items'][0]['snippet']['thumbnails']:
             Channel.url.append(self.channel['items'][0]['snippet']['thumbnails'][channels_]['url'])
+        self.url = 'https://www.youtube.com/channel/' + self.__channel_id
         self.subscriber_Count = self.channel['items'][0]["statistics"]["subscriberCount"]
         self.description = self.channel['items'][0]['snippet']["description"]
         self.view_count = self.channel['items'][0]["statistics"]["viewCount"]
@@ -33,18 +34,17 @@ class Channel:
     @classmethod
     def get_service(cls):
         """Метод создания экземпляров класса"""
-        return build('youtube', 'v3', developerKey=Channel.API_KEY)
+        return build('youtube', 'v3', developerKey=cls.API_KEY)
 
     @staticmethod
-    def to_json(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
+    def to_json(path, moscowpython_id='UC-OVMPlMA3-YCIeg4z5z23A'):
         """Сохранение значений атрибутов экземпляра класса в json"""
-        exz = Channel(standart)
         with open(path, 'w') as file:
-            json.dump(exz.channel, fp=file)
+            json.dump(Channel(moscowpython_id).channel, fp=file)
 
     def __str__(self):
         """метод вывода пользователю"""
-        return f"{self.title} (https://www.youtube.com/channel/{self.channel_id})"
+        return f"{self.title} ({self.url})"
 
     def __add__(self, other):
         """метод перезрузки операции сложения"""
