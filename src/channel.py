@@ -30,28 +30,46 @@ class Channel:
         return self.__channel_id
 
     @classmethod
-    def get_service(cls, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
+    def get_service(cls):
         """Метод создания экземпляров класса"""
-        return cls(standart).youtube
-
-    # @staticmethod
-    # def to_json(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
-    #     """сохранения имен атрибутов экземпляра , и их значеня в словарь"""
-    #     """Сохранение значений атрибутов экземпляра класса в json"""
-    #
-    #     with open(path, 'w') as file:
-    #         exz = Channel(standart)
-    #         dict_ = {}
-    #         for attr in exz.__dict__:
-    #             print(attr)
-    #             dict_[attr] = str(getattr(exz, attr))
-    #             print(dict_)
-    #         json.dump(dict_, fp=file)
+        return build('youtube', 'v3', developerKey=Channel.API_KEY)
 
     @staticmethod
     def to_json(path, standart='UC-OVMPlMA3-YCIeg4z5z23A'):
-        # Или так правильно ?
         """Сохранение значений атрибутов экземпляра класса в json"""
         exz = Channel(standart)
         with open(path, 'w') as file:
             json.dump(exz.channel, fp=file)
+
+    def __str__(self):
+        """метод вывода пользователю"""
+        url_description_index = self.description.find('https')  # только там какая-то вменяемая ссылка
+        return f"{self.title} ({self.description[url_description_index:-3]})"
+
+    def __add__(self, other):
+        """метод перезрузки операции сложения"""
+        return int(self.subscriber_Count) + int(other.subscriber_Count)
+
+    def __sub__(self, other):
+        """метод перезрузки операции вычитания"""
+        return int(self.subscriber_Count) - int(other.subscriber_Count)
+
+    def __gt__(self, other):
+        """метод перезрузки операции сравнения"""
+        return int(self.subscriber_Count) > int(other.subscriber_Count)
+
+    def __ge__(self, other):
+        """метод перезрузки операции сравнения"""
+        return int(self.subscriber_Count) >= int(other.subscriber_Count)
+
+    def __lt__(self, other):
+        """метод перезрузки операции сравнения"""
+        return int(self.subscriber_Count) < int(other.subscriber_Count)
+
+    def __le__(self, other):
+        """метод перезрузки операции сравнения"""
+        return int(self.subscriber_Count) <= int(other.subscriber_Count)
+
+    def __eq__(self, other):
+        """метод перезрузки операции сравнения"""
+        return int(self.subscriber_Count) == int(other.subscriber_Count)
