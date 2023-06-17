@@ -33,7 +33,7 @@ class Channel:
 
     @classmethod
     def get_service(cls):
-        """Метод создания экземпляров класса"""
+        """Метод создания объекта для работы с API"""
         return build('youtube', 'v3', developerKey=cls.API_KEY)
 
     @staticmethod
