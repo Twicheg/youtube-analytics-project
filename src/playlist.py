@@ -35,8 +35,7 @@ class PlayList:
         for item in self.video_response['items']:
             if int(item['statistics']['likeCount']) == int(max_liked):
                 id_video = item['id']
-        # print(id_video)
-        return f"https://youtu.be/{id_video}"
+        return "https://youtu.be/"+id_video
 
     @property
     def total_duration(self):
